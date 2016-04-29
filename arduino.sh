@@ -64,6 +64,7 @@ function setup_env()
     # Warn if the launch failed
     if [ $? -ne 0 ]; then
         echo -e "Launch of X server failed"
+        exit_code=1
     fi
     
     sleep 3
@@ -77,4 +78,11 @@ function setup_env()
     $(sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino)
     
     return $exit_code
+}
+
+function install_repo_as_library()
+{
+    local lib_name=${TRAVIS_BUILD_DIR##*/}
+    ln -s ${TRAVIS_BUILD_DIR} /usr/local/share/arduino/libraries/${lib_name}
+    return 0
 }
