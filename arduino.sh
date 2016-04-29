@@ -58,6 +58,7 @@ function setup_env()
     local exit_code=0
     # Arduino requires an X server even with command line
     # https://github.com/arduino/Arduino/issues/1981
+    echo -e "Starting X Server"
     $("/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16")
     
     # Warn if the launch failed
@@ -68,6 +69,7 @@ function setup_env()
     $(export DISPLAY=:1.0)
 
     # Install the Arduino IDE
+    echo -e "Downloading and installing Arduino IDE"
     $(wget http://downloads.arduino.cc/arduino-1.6.5-linux64.tar.xz)
     $(tar xf arduino-1.6.5-linux64.tar.xz)
     $(sudo mv arduino-1.6.5 /usr/local/share/arduino)
