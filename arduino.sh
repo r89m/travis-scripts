@@ -65,8 +65,9 @@ function setup_env()
     if [ $? -ne 0 ]; then
         echo -e "Launch of X server failed"
     fi
-    $(sleep 3)
-    $(export DISPLAY=:1.0)
+    
+    sleep 3
+    export DISPLAY=:1.0
 
     # Install the Arduino IDE
     echo -e "Downloading and installing Arduino IDE"
