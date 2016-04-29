@@ -80,9 +80,21 @@ function setup_env()
     return $exit_code
 }
 
+# Pass the git url of a repo to install. If none is given, use the build dir
 function install_repo_as_library()
 {
-    local lib_name=${TRAVIS_BUILD_DIR##*/}
-    ln -s ${TRAVIS_BUILD_DIR} /usr/local/share/arduino/libraries/${lib_name}
+    local library_dir="/usr/local/share/arduino/libraries/"
+
+    # Check if the repo url was given
+    if [ -z ${1+x} ]; then
+        echo "Installing given repo as library";
+        $(cd ${library_dir}, git clone ${1})
+        ls ${library_dir}
+    else
+        echo "Installing TRAVIS_BUILD_DIR as library";
+        local lib_name=${TRAVIS_BUILD_DIR##*/}
+        ln -s ${TRAVIS_BUILD_DIR} "${library_dir}${lib_name}"
+    fi
+    
     return 0
 }
