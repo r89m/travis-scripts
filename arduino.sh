@@ -92,7 +92,7 @@ function install_repo_as_library()
         ln -s ${TRAVIS_BUILD_DIR} "${library_dir}${lib_name}"
     else
         echo "Installing given repo as library";
-        $(cd ${library_dir}, git clone ${1})
+        $(cd ${library_dir} ; git clone ${1})
         ls ${library_dir}
     fi
     
