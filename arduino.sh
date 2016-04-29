@@ -59,7 +59,7 @@ function setup_env()
     # Arduino requires an X server even with command line
     # https://github.com/arduino/Arduino/issues/1981
     echo -e "Starting X Server"
-    $("/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16")
+    $(/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16)
     
     # Warn if the launch failed
     if [ $? -ne 0 ]; then
