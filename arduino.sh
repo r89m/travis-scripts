@@ -87,13 +87,13 @@ function install_repo_as_library()
 
     # Check if the repo url was given
     if [ -z ${1+x} ]; then
-        echo "Installing given repo as library";
-        $(cd ${library_dir}, git clone ${1})
-        ls ${library_dir}
-    else
         echo "Installing TRAVIS_BUILD_DIR as library";
         local lib_name=${TRAVIS_BUILD_DIR##*/}
         ln -s ${TRAVIS_BUILD_DIR} "${library_dir}${lib_name}"
+    else
+        echo "Installing given repo as library";
+        $(cd ${library_dir}, git clone ${1})
+        ls ${library_dir}
     fi
     
     return 0
